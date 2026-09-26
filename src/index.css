@@ -1,0 +1,8 @@
+/** @format */
+
+@import "tailwindcss";
+body {
+  height: 100vh;
+  width: 98vw;
+  background-color: #f9f9fb;
+}
