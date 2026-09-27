@@ -19,9 +19,18 @@ export const Product = () => {
       }
     };
     fetchProduct();
-  }, [page]);
+  }, [page, limit]);
 
   console.log(items);
+
+  const handlePage = (para) => {
+    if (para === "next") {
+      setPage(page + 1);
+    }
+    if (para === "prev") {
+      setPage(page - 1);
+    }
+  };
 
   return (
     <div className="px-2">
@@ -56,14 +65,20 @@ export const Product = () => {
         className="flex justify-end
        my-8  ">
         <button
-          className={`flex items-center justify-center rounded-sm mx-2 h-8 w-8 border ${page == 1 ? "text-red-700" : ""}`}>
+          onClick={() => handlePage("prev")}
+          className={`flex items-center ${page <= 1 ? "cursor-not-allowed" : "cursor-pointer"} hover:bg-blue-300 justify-center rounded-sm mx-2 h-8 w-12 border ${page == 1 ? "text-red-700" : ""}`}
+          disabled={page <= 1}>
+          {"<< "}
           {page - 1}
         </button>
-        <button className="flex items-center justify-center rounded-sm mx-2 h-8 w-8 border">
+        <p className="flex items-center justify-center rounded-sm mx-2 h-8 w-8 ">
           {page}
-        </button>
-        <button className="flex items-center justify-center rounded-sm mx-2 h-8 w-8 border">
+        </p>
+        <button
+          onClick={() => handlePage("next")}
+          className="flex items-center cursor-pointer hover:bg-blue-300 justify-center rounded-sm mx-2 h-8 w-12 border">
           {page + 1}
+          {" >>"}
         </button>
       </div>
 
